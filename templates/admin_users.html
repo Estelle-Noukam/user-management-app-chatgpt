@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Gestion utilisateurs</h2>
+
+<form method="POST" action="/admin/users/create">
+
+    <input type="text" name="username" placeholder="Nom utilisateur" required><br>
+
+    <input type="password" name="password" placeholder="Mot de passe" required><br>
+
+    <select name="role">
+
+        <option value="user">user</option>
+
+        <option value="admin">admin</option>
+
+    </select><br>
+
+    <button type="submit">Créer utilisateur</button>
+
+</form>
+
+<hr>
+
+<table>
+
+<tr>
+    <th>ID</th>
+    <th>Nom utilisateur</th>
+    <th>Rôle</th>
+    <th>Actions</th>
+</tr>
+
+{% for u in users %}
+
+<tr>
+
+    <td>{{ u.id }}</td>
+
+    <td>{{ u.username }}</td>
+
+    <td>{{ u.role }}</td>
+
+    <td>
+
+        <a href="/admin/users/edit/{{ u.id }}">Modifier</a>
+
+        <a href="/admin/users/delete/{{ u.id }}">Supprimer</a>
+
+    </td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}
